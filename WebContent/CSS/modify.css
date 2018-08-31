@@ -1,0 +1,32 @@
+@CHARSET "utf-8";
+
+.modifydiv{
+	width:400px;
+float:right;
+margin-top:3%;
+margin-right: 4%;
+margin-bottom: 5%;
+
+}
+.textpageNo{
+	width:15%;
+}
+
+a{
+	color:black;
+	text-decoration: none;
+}
+a:HOVER {
+	text-decoration: none;
+}
+	
+	@media screen and (max-width:810px){
+	.modifydiv{ 
+
+width:400px;
+float:right;
+margin-top:3%;
+margin-right: 4%;
+margin-bottom: 5%;
+}
+	}

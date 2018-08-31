@@ -1,0 +1,18 @@
+@CHARSET "utf-8";
+
+.content{
+	display: none;
+}
+#postselect{
+	display: none
+}
+#postrequired{
+	display: none
+}
+select{
+	border: 1px solid #4FBBDB;
+	border-radius:5px;
+	box-shadow:3px 1px 5px #00A0E9;
+-webkit-box-shadow: 3px 1px 5px #00A0E9;   
+ -moz-box-shadow: 3px 1px 5px #00A0E9;  
+}

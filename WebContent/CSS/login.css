@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+.title{
+	left: 10%;
+	top: 34%;
+	position:fixed;
+	font-size: 55px;
+	font-style:italic ;
+	color:#E7E088;
+	font-family: KaiTi;
+	text-shadow:5px 2px 5px #8080ff;
+}
+.back{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+	/* background-image: url("/Manager/images/back.jpg"); */
+	background-image: url("/OnlineExamSystem/images/bodyback.jpg");
+	z-index: -2;
+}
+.bg{
+	top:28%;
+	left:0;
+	right:0;
+	height: 300px;
+	position: fixed;
+}
+
+.box{
+	position:fixed;
+	right:20%;
+}
+.index{
+	border-radius:20px;
+	position:absolute;
+	-webkit-filter: blur(2px);
+	filter:blur(2px);
+	/* background:rgba(231, 180, 180,0.3); */
+    background-image: url("/OnlineExamSystem/images/div.jpg");
+    width:100%;
+	height:100%;
+    z-index: -1;
+}
+.margin{
+	margin-top:18%;
+	
+}
+.loginbox{
+	
+	border-radius:20px;
+	height: 220px;
+	width: 260px;
+/* 	float: left;  */
+}
+.loginbutton{
+	color: #2F465B;
+	background: rgba(0, 88, 165, 0.14);
+	width: 150px;
+	left: 50px;
+	margin-top:25px;
+	font-weight: 900;
+	font-family: YouYuan;
+	border-color: #4B6C8A;
+	
+}
+.loginbutton:HOVER{
+	background-color:rgba(0, 88, 165, 0.14);
+}
+#sub:HOVER{
+	background-color:#4B6C8A;
+}
+.color{
+	background: rgba(0, 88, 165, 0.14);
+	border:  1px solid rgb(86, 122, 153);
+	border-radius:10px;
+	-webkit-box-shadow: 1px 3px 5px #3F5D79;   
+ -moz-box-shadow: 1px 3px 5px #3F5D79;   
+ box-shadow: 1px 3px 5px #3F5D79; 
+}
+.ah{
+	margin-top: 10px;
+}
+
+.text{
+	left:35px;
+	width:70%;
+	margin-top: 30px;
+}
+font{
+	font-family: Microsoft Yahei;
+	font:bolder;
+}

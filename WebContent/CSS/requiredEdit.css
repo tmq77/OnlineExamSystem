@@ -1,0 +1,38 @@
+@CHARSET "utf-8";
+
+.requiredBlock:HOVER{
+	-webkit-box-shadow: 1px 3px 40px #55E0EF;   
+ -moz-box-shadow: 1px 3px 40px #55E0EF;   
+ box-shadow: 1px 3px 40px #55E0EF; 
+}
+.requiredBlock{
+	width: 80%;
+	height:70px;
+	margin-left: 10%;
+	margin-top: 3%;
+	border: 1px solid rgba(99, 99, 232, 0.37);
+	background-color: rgba(0, 160, 233, 0.06);
+	-webkit-box-shadow: 1px 3px 40px #4D8DA0;   
+ -moz-box-shadow: 1px 3px 40px #4D8DA0;   
+ box-shadow: 1px 3px 40px #4D8DA0; 
+overflow-y:auto
+}
+
+.page{
+/* display:none; */   
+
+width:800px;
+float:right;
+margin-top:3%;
+margin-right: 9%;
+margin-bottom: 5%;
+}
+
+
+.textpageNo{
+	width:9%;
+}
+.search{
+	width:13%;
+}
+

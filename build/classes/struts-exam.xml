@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 前端考试的配置信息 -->
+    
+    	
+
+	<package name="exam" namespace="/" extends="struts-default">
+	    
+	    <interceptors>
+			<interceptor name="Authority" class="interceptor.AuthorityInterceptor" />
+			<interceptor-stack name="myInterceptor"><!-- 配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" /><!-- 配置自定义的拦截器 --><!-- 后进先出 -->
+				<interceptor-ref name="Authority" />
+			</interceptor-stack>
+		</interceptors>
+	
+	    
+
+	    <default-action-ref name="pagenotfound"></default-action-ref>  <!-- 默认action,未找到页面跳转 -->
+  			 <action name="pagenotfound">  
+              <result>/WEB-INF/content/404.html</result>  
+   			</action>
+	    
+  		
+  			 
+<!-- 查看面试信息 -->
+		<action name="ShowStaff" class="ShowStaff">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/showAllStaff.jsp </result>
+			<result name="error">/WEB-INF/content/tips.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+
+
+		<!-- 考前确认 -->
+		<action name="BeforeExam" class="BeforeExam">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/beforeExam.jsp</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+
+		<!-- 抽取试卷 -->
+		<action name="GetExamQs" class="GetExamQs">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/test.jsp</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 存储试卷答案 -->
+		<action name="GetExamAnswer" class="GetExamAnswer">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">End</param>
+			</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+			<result name="none">/WEB-INF/content/examSuccess.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 客观分数存入数据库 -->
+		<action name="End" class="ExamEnd">
+			<interceptor-ref name="myInterceptor" />
+			<result name="login">/WEB-INF/content/index.jsp</result>
+			<result name="success">/WEB-INF/content/examSuccess.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+	
+		</package>
+		</struts>

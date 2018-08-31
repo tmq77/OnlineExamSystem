@@ -1,0 +1,85 @@
+@CHARSET "UTF-8";
+#top_nav{
+	color:#8000ff;
+	padding: 5px 20px 10px 20px;
+    margin:0px 5px 30px 25px;
+}
+#mid{
+	width:270px;
+	margin:auto; 
+}
+#cfoot{
+	padding:20px 10px 10px 20px;
+	margin:o auto;
+}
+
+.bk{
+    border: 1px solid #d3d3d3;
+}
+.linem{
+	padding:10px 0px 10px 0px;
+}
+
+.bfoot{
+	height:10%;
+}
+.role{
+	/* padding:0px 5px 5px 5px; */
+	padding: 0px 10px 5px 15px;
+}
+.marg{
+	margin: 8px;
+}
+
+.mycss{
+	align:center ;
+	text-align: center;
+	color: gray;
+	font-family: Microsoft Yahei;
+}
+
+tr{
+	font-family: Microsoft Yahei;
+}
+
+th{
+	font-family: Microsoft Yahei;
+	text-align: center;
+}
+
+td{
+	text-align: center;
+}
+.title{
+	text-align: center;
+}
+.srole1{
+	float:left;
+	padding-left: 18px;
+}
+.srole2{
+	float: right;
+	padding-right: 18px;
+}
+.confirm{
+	float:left;
+	/* padding-left: 5px; */
+}
+.reset{
+	float:right;
+	/* padding-right: 5px; */
+}
+.pad{
+	height: 40px;
+	margin:12px;
+	padding:1px;
+}
+p{
+	font-family: Microsoft Yahei;
+}
+.warn{
+	font-weight:bold;
+	font-family: Microsoft Yahei;
+	color: red;
+}
+a{text-decoration: none;}

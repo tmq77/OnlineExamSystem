@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<!-- 查看试卷的配置信息 -->
+
+
+
+	<package name="score" namespace="/" extends="struts-default">
+	    <interceptors>
+			<interceptor name="Authority" class="interceptor.AuthorityInterceptor" />
+			<interceptor-stack name="myInterceptor"><!-- 配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" /><!-- 配置自定义的拦截器 --><!-- 后进先出 -->
+				<interceptor-ref name="Authority" />
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 查看专业简答答案 -->
+		<action name="ShowProAnswer" class="ShowProAnswer">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/showAnswer.jsp</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 查看基础简答答案 -->
+		<action name="ShowBaseAnswer" class="ShowBaseAnswer">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/showAnswer.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 查看必答题答案 -->
+		<action name="ShowRequiredAnswer" class="ShowRequiredAnswer">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/ShowRequiredAnswer.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 查看试卷 -->
+		<action name="ShowScore" class="ShowScore">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/judge.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+	</package>
+</struts>

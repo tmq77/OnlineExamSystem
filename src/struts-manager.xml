@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <!-- 后台管理配置信息 -->
+	<package name="manager" namespace="/" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="Authority" class="interceptor.AuthorityInterceptor" />
+			<interceptor-stack name="myInterceptor"><!-- 配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" /><!-- 配置自定义的拦截器 --><!-- 后进先出 -->
+				<interceptor-ref name="Authority" />
+			</interceptor-stack>
+		</interceptors>
+		<!--_________________________________________________________ -->
+		<!-- 登录Action -->
+		<action name="LoginAction" class="Login">
+			<result name="success" type="chain">
+				<param name="actionName">BeforeExam</param>
+			</result>
+			<result name="input" type="redirect">admin</result>
+			<result name="error">/WEB-INF/content/index.jsp</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 超级管理员登录Action -->
+		<action name="RootLogin" class="RootLogin">
+			<result name="success" type="chain">
+				<param name="actionName">ShowAdmin</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="input" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 录入Action -->
+		<action name="Add" class="AddUser">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">view</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+			<result name="input" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 录入管理员Action -->
+		<action name="AddAdmin" class="AddAdmin">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">ShowAdmin</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 查看管理员信息 -->
+		<action name="ShowAdmin" class="ShowAdmin">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/root.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 查看面试者信息 -->
+		<action name="view" class="OverView">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/modify.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 精确查看信息 -->
+		<action name="ModifyStatus" class="ModifyStatus">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="json">
+			    <param name="noCache">true</param>
+				<param name="root">jsonList</param>  <!-- 指定此参数将不会把整个Action对象序列化,而只将此参数序列化 -->
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 点击通过按钮后数据转储 -->
+		<action name="PrintPaper" class="PrintPaper">
+			<interceptor-ref name="myInterceptor" />
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 删除管理员信息 -->
+		<action name="DeleteAdmin" class="DeleteAdmin">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">ShowAdmin</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 删除信息 -->
+		<action name="Delete" class="Delete">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">view</param>
+			</result>
+			<result name="none" type="chain">
+				<param name="actionName">ShowScore</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+
+		<!-- 删除面试信息 -->
+		<action name="DeleteStaff" class="DeleteStaff">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">ShowStaff</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 修改前的过渡,先跳转到此页面,处理之后再跳转入修改页面进行修改 -->
+		<action name="UpdateTemp" class="UpdateTemp">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="json">
+			    <param name="noCache">true</param>
+				<param name="root">jsonList</param>  <!-- 指定此参数将不会把整个Action对象序列化,而只将此参数序列化 -->
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 修改信息 -->
+		<action name="Update" class="Update">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">view</param>
+			</result>
+			<result name="error">/WEB-INF/content/tips.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+			<result name="input" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 修改管理员信息 -->
+		<action name="ModifyAdmin" class="ModifyAdmin">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">ShowAdmin</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 打印试卷 -->
+		<action name="PrintAllPaper" class="PrintAllPaper">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success">/WEB-INF/content/print.jsp</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 录入面试信息 -->
+		<action name="GetStaff" class="GetStaff">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="chain">
+				<param name="actionName">ShowScore</param>
+			</result>
+			<result name="none" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 退出登录 -->
+		<action name="exit" class="Exit">
+			<result name="success">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 上传 -->
+		<action name="SingleUpload" class="SingleUpload">
+		    <interceptor-ref name="fileUpload">
+			</interceptor-ref>
+			<interceptor-ref name="myInterceptor" />
+		    <param name="savePath">/uploadSingle</param>
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="input" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/404.html</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 解析 -->
+		<action name="ParseXls" class="ParseXls">
+		    <interceptor-ref name="myInterceptor" />
+		    <param name="savePath">/uploadSingle</param>
+			<result name="success" type="json">
+			    <param name="noCache">true</param>
+				<param name="root">jsonList</param>  <!-- 指定此参数将不会把整个Action对象序列化,而只将此参数序列化 -->
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="input" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/404.html</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 下载 -->
+		<action name="ModelDownload" class="ModelDownload">
+		    <interceptor-ref name="myInterceptor" />
+		    <result type="stream">
+		        <param name="contentType">application/excel</param>
+		        <!-- 指定有getTargetFile()方法返回被下载文件的InputStream -->
+		        <param name="inputName">targetFile</param>
+		        <param name="bufferSize">51200</param><!-- 下载文件的缓冲大小 -->
+		        <!-- 指定名称 -->
+		        <param name="contentDisposition">filename="model.xls"</param>
+		    </result>
+		    <result name="login">/WEB-INF/content/404.html</result>
+		</action>
+		<!--_________________________________________________________ -->
+			<!-- 发送邮件 -->
+		<action name="SendEmail" class="SendEmail">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<!-- 设置管理员邮箱 -->
+		<action name="SetMail" class="SetMail">
+			<interceptor-ref name="myInterceptor" />
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="error" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">result</param>
+			</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+
+		<action name="index">
+			<result>/WEB-INF/content/index.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<action name="login">
+			<result>/WEB-INF/content/login.jsp</result>
+		</action>
+		<!--_________________________________________________________ -->
+		<action name="rootlogin">
+			<result>/WEB-INF/content/rootlogin.jsp</result>
+		</action>
+
+		<!-- <action name="addUser">
+			<interceptor-ref name="myInterceptor" />
+			<result>/WEB-INF/content/addUser.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action> -->
+		
+		<action name="addQuestion">
+		    <interceptor-ref name="myInterceptor" />
+			<result>/WEB-INF/content/addQuestion.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		
+		
+		<action name="examedit">
+		    <interceptor-ref name="myInterceptor" />
+			<result>/WEB-INF/content/examedit.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+		
+		<action name="admin">
+		    <interceptor-ref name="myInterceptor" />
+			<result>/WEB-INF/content/admin.jsp</result>
+			<result name="login">/WEB-INF/content/login.jsp</result>
+		</action>
+
+		<!-- <action name="*">
+			<interceptor-ref name="myInterceptor" />
+			<result>/WEB-INF/content/{1}.jsp</result>
+			<result name="login">/WEB-INF/content/index.jsp</result>
+		</action> -->
+		<action name="">
+			<result>/WEB-INF/content/index.jsp</result>
+		</action>
+	</package>
+</struts>
